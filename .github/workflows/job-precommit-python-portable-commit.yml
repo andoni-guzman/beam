@@ -43,7 +43,7 @@ on:
 jobs:
   python-portable-commit:
     name: Run Python Portable Commit
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
@@ -55,10 +55,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - name: Install python 3.9
+      - name: Install python 3.7
         uses: actions/setup-python@v2
         with:
-          python-version: "3.9"
+          python-version: "3.7"
       - name: Run :sdks:python:test-suites:portable:py${{ matrix.python_ver }}:preCommitPy${{ matrix.python_ver }}
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
