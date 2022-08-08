@@ -17,7 +17,7 @@
 
 # To learn more about GitHub Actions in Apache Beam check the CI.md
 
-name: Python_Portable_Commit
+name: Python_PVR_Flink
 
 on:
   workflow_dispatch:
@@ -30,24 +30,23 @@ on:
     branches: ['main', 'release-*']
     tags: 'v*'
     paths: ['model/**',
-            'runners/core-construction-java/**',
-            'runners/core-java/**',
-            'runners/extensions-java/**',
-            'runners/flink/**',
-            'runners/java-fn-execution/**',
-            'runners/reference/**',
-            'sdks/python/**',
-            'release/**']
+      'runners/core-construction-java/**',
+      'runners/core-java/**',
+      'runners/extensions-java/**',
+      'runners/flink/**',
+      'runners/java-fn-execution/**',
+      'runners/reference/**',
+      'sdks/python/**',
+      'release/**',
+      'sdks/java/io/kafka/**',]
 
 
 jobs:
-  python-portable-commit:
-    name: Run Python Portable Commit
+  python-pvr-flink:
+    name: Run Python PVR Flink
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
-      matrix:
-        python_ver: ['37','39']
     timeout-minutes: 120
     steps:
       - name: Checkout code
@@ -55,12 +54,8 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - name: Install python 3.7
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.7"
-      - name: Run :sdks:python:test-suites:portable:py${{ matrix.python_ver }}:preCommitPy${{ matrix.python_ver }}
+      - name: Run :sdks:python:test-suites:portable:flinkValidatesRunnerPrecommit
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: :sdks:python:test-suites:portable:py${{ matrix.python_ver }}:preCommitPy${{ matrix.python_ver }}
-          gradle-switches: "--continue"
+          gradle-command: :sdks:python:test-suites:portable:flinkValidatesRunnerPrecommit
+      
