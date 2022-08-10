@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-name: PostCommit Java Nexmark Direct Flink
+name: PostCommit Java Nexmark Flink
 
 on:
   workflow_dispatch:
