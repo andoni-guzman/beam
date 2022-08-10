@@ -48,7 +48,7 @@ jobs:
         with:
           gradle-command: >
             :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
-            -Pnexmark.args=" --runner=DirectRunner,
+            -Pnexmark.args=" 
               --bigQueryTable=nexmark,
               --bigQueryDataset=nexmark,
               --project=apache-beam-testing,
@@ -59,7 +59,7 @@ jobs:
               --influxHost=http://10.128.0.96:8086,
               --baseInfluxMeasurement=nexmark,
               --exportSummaryToInfluxDB=true,
-              --influxRetentionPolicy=forever
+              --influxRetentionPolicy=forever,
               --streaming=false,
               --suite=SMOKE,
               --manageResources=false,
