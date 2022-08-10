@@ -49,6 +49,7 @@ jobs:
           gradle-command: >
             :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
             -Pnexmark.args=" 
+              --runner=DirectRunner 
               --bigQueryTable=nexmark 
               --bigQueryDataset=nexmark 
               --project=apache-beam-testing 
