@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-name: PostCommit Java JMPS Java 11,17
+name: PostCommit Java Nexmark Runners 
 
 on:
   workflow_dispatch:
