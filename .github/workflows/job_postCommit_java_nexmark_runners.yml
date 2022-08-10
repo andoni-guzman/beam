@@ -32,10 +32,10 @@ on:
 jobs:
   java-postcommit-nexmark-direct:
     name: Run PostCommit Java Nexmark - runner
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: true
-    timeout-minutes: 120
+    timeout-minutes: 240
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -49,6 +49,17 @@ jobs:
           gradle-command: >
             :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
             -Pnexmark.args=" --runner=DirectRunner,
+              --bigQueryTable=nexmark,
+              --bigQueryDataset=nexmark,
+              --project=apache-beam-testing,
+              --resourceNameMode=QUERY_RUNNER_AND_MODE,
+              --exportSummaryToBigQuery=true,
+              --tempLocation=gs://temp-storage-for-perf-tests/nexmark,
+              --influxDatabase=beam_test_metrics,
+              --influxHost=http://10.128.0.96:8086,
+              --baseInfluxMeasurement=nexmark,
+              --exportSummaryToInfluxDB=true,
+              --influxRetentionPolicy=forever
               --streaming=false,
               --suite=SMOKE,
               --manageResources=false,
