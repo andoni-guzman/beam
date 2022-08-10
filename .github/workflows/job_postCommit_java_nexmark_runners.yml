@@ -104,7 +104,6 @@ jobs:
               --monitorJobs=true
               --enforceEncodability=true
               --enforceImmutability=true "
-
       - name: Run *** RUN NEXMARK IN SQL BATCH MODE USING DIRECT RUNNER ***
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
