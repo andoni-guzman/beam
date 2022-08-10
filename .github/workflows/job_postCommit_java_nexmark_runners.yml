@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-name: PostCommit Java Nexmark Runners 
+name: PostCommit Java Nexmark Direct Runner
 
 on:
   workflow_dispatch:
@@ -43,7 +43,7 @@ env:
 
 jobs:
   java-postcommit-nexmark-direct:
-    name: Run PostCommit Java Nexmark - runner
+    name: Run PostCommit Java Nexmark - Direct Runner
     runs-on: self-hosted
     strategy:
       fail-fast: true
@@ -79,3 +79,136 @@ jobs:
               --monitorJobs=true 
               --enforceEncodability=true 
               --enforceImmutability=true "
+
+      - name: Run *** RUN NEXMARK IN STREAMING MODE USING DIRECT RUNNER ***
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: >
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
+            -Pnexmark.args=" 
+              --runner=DirectRunner 
+              --bigQueryTable=$BIGQUERYTABLE
+              --bigQueryDataset=$BIGQUERYDATASET
+              --project=$PROJECT
+              --resourceNameMode=$RESOURCENAMEMODE
+              --exportSummaryToBigQuery=$EXPORTSUMMARYTOBIGQUERY
+              --tempLocation=$TEMPLOCATION
+              --influxDatabase=$INFLUXDATABASE
+              --influxHost=$INFLUXHOST
+              --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT
+              --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB
+              --influxRetentionPolicy=$INFLUXRETENTIONPOLICY          
+              --streaming=true
+              --suite=SMOKE
+              --manageResources=false
+              --monitorJobs=true
+              --enforceEncodability=true
+              --enforceImmutability=true "
+
+      
+      - name: Run *** RUN NEXMARK IN SQL BATCH MODE USING DIRECT RUNNER ***
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: >
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
+            -Pnexmark.args=" 
+              --runner=DirectRunner 
+              --bigQueryTable=$BIGQUERYTABLE 
+              --bigQueryDataset=$BIGQUERYDATASET 
+              --project=$PROJECT 
+              --resourceNameMode=$RESOURCENAMEMODE 
+              --exportSummaryToBigQuery=$EXPORTSUMMARYTOBIGQUERY 
+              --tempLocation=$TEMPLOCATION 
+              --influxDatabase=$INFLUXDATABASE 
+              --influxHost=$INFLUXHOST 
+              --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT 
+              --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB 
+              --influxRetentionPolicy=$INFLUXRETENTIONPOLICY 
+              --queryLanguage=sql 
+              --streaming=false 
+              --suite=SMOKE 
+              --manageResources=false 
+              --monitorJobs=true 
+              --enforceEncodability=true 
+              --enforceImmutability=true "
+
+        - name: Run *** RUN NEXMARK IN SQL STREAM MODE USING DIRECT RUNNER ***
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: >
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
+            -Pnexmark.args=" 
+              --runner=DirectRunner 
+              --bigQueryTable=$BIGQUERYTABLE 
+              --bigQueryDataset=$BIGQUERYDATASET 
+              --project=$PROJECT 
+              --resourceNameMode=$RESOURCENAMEMODE 
+              --exportSummaryToBigQuery=$EXPORTSUMMARYTOBIGQUERY 
+              --tempLocation=$TEMPLOCATION 
+              --influxDatabase=$INFLUXDATABASE 
+              --influxHost=$INFLUXHOST 
+              --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT 
+              --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB 
+              --influxRetentionPolicy=$INFLUXRETENTIONPOLICY 
+              --queryLanguage=sql 
+              --streaming=true 
+              --suite=SMOKE 
+              --manageResources=false 
+              --monitorJobs=true 
+              --enforceEncodability=true 
+              --enforceImmutability=true "
+      
+      - name: Run *** RUN NEXMARK IN ZETASQL BATCH MODE USING DIRECT RUNNER ***
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: >
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
+            -Pnexmark.args=" 
+              --runner=DirectRunner 
+              --bigQueryTable=$BIGQUERYTABLE 
+              --bigQueryDataset=$BIGQUERYDATASET 
+              --project=$PROJECT 
+              --resourceNameMode=$RESOURCENAMEMODE 
+              --exportSummaryToBigQuery=$EXPORTSUMMARYTOBIGQUERY 
+              --tempLocation=$TEMPLOCATION 
+              --influxDatabase=$INFLUXDATABASE 
+              --influxHost=$INFLUXHOST 
+              --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT 
+              --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB 
+              --influxRetentionPolicy=$INFLUXRETENTIONPOLICY 
+              --queryLanguage=zetasql 
+              --streaming=false 
+              --suite=SMOKE 
+              --manageResources=false 
+              --monitorJobs=true 
+              --enforceEncodability=true 
+              --enforceImmutability=true "
+
+      - name:   RUN *** NEXMARK IN ZETASQL STREAMING MODE USING DIRECT RUNNER ***
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: >
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
+            -Pnexmark.args=" 
+              --runner=DirectRunner 
+              --bigQueryTable=$BIGQUERYTABLE 
+              --bigQueryDataset=$BIGQUERYDATASET 
+              --project=$PROJECT 
+              --resourceNameMode=$RESOURCENAMEMODE 
+              --exportSummaryToBigQuery=$EXPORTSUMMARYTOBIGQUERY 
+              --tempLocation=$TEMPLOCATION 
+              --influxDatabase=$INFLUXDATABASE 
+              --influxHost=$INFLUXHOST 
+              --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT 
+              --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB 
+              --influxRetentionPolicy=$INFLUXRETENTIONPOLICY 
+              --queryLanguage=sql 
+              --streaming=true 
+              --suite=SMOKE 
+              --manageResources=false 
+              --monitorJobs=true 
+              --enforceEncodability=true 
+              --enforceImmutability=true "
+      
+      
+        
