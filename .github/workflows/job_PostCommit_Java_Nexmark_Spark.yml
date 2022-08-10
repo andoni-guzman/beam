@@ -237,5 +237,3 @@ jobs:
               --suite=SMOKE 
               --manageResources=false 
               --monitorJobs=true "
-      
-        
