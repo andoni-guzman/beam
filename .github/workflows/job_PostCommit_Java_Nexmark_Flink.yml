@@ -191,5 +191,3 @@ jobs:
               --suite=SMOKE 
               --manageResources=false 
               --monitorJobs=true "
-        
-You have no unread notifications
