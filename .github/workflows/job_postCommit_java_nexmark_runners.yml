@@ -28,32 +28,21 @@ on:
     tags: 'v*'
     paths: []
 
+env:
+  BIGQUERYTABLE: nexmark
+  BIGQUERYDATASET: nexmark
+  PROJECT: apache-beam-testing
+  RESOURCENAMEMODE: QUERY_RUNNER_AND_MODE
+  EXPORTSUMMARYTOBIGQUERY: true
+  TEMPLOCATION: gs://temp-storage-for-perf-tests/nexmark
+  INFLUXDATABASE: beam_test_metrics
+  INFLUXHOST: http://10.128.0.96:8086 
+  BASEINFLUXMEASUREMENT: nexmark
+  EXPORTSUMMARYTOINFLUXDB: true
+  INFLUXRETENTIONPOLICY: forever
+
 jobs:
   java-postcommit-nexmark-direct:
-    variables:
-      - name: bigQueryTable
-        value: nexmark
-      - name: bigQueryDataset
-        value: nexmark
-      - name: project
-        value: apache-beam-testing
-      - name: resourceNameMode
-        value: QUERY_RUNNER_AND_MODE
-      - name: exportSummaryToBigQuery
-        value: true
-      - name: tempLocation
-        value: gs://temp-storage-for-perf-tests/nexmark
-      - name: influxDatabase
-        value: beam_test_metrics
-      - name: influxHost
-        value: http://10.128.0.96:8086 
-      - name: baseInfluxMeasurement
-        value: nexmark
-      - name: exportSummaryToInfluxDB
-        value: true
-      - name: influxRetentionPolicy
-        value: forever
-        
     name: Run PostCommit Java Nexmark - runner
     runs-on: self-hosted
     strategy:
@@ -73,17 +62,17 @@ jobs:
             :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:direct-java 
             -Pnexmark.args=" 
               --runner=DirectRunner 
-              --bigQueryTable=${{variables.bigQueryTable}}
-              --bigQueryDataset=${{variables.bigQueryDataset}}
-              --project=${{variables.project}} 
-              --resourceNameMode=${{variables.resourceNameMode}}
-              --exportSummaryToBigQuery=${{variables.exportSummaryToBigQuery}}
-              --tempLocation=${{variables.tempLocation}}
-              --influxDatabase=${{variables.influxDatabase}} 
-              --influxHost=${{variables.influxHost}} 
-              --baseInfluxMeasurement=${{variables.baseInfluxMeasurement}} 
-              --exportSummaryToInfluxDB=${{variables.exportSummaryToInfluxDB}}
-              --influxRetentionPolicy=${{variables.influxRetentionPolicy}}
+              --bigQueryTable=$BIGQUERYTABLE
+              --bigQueryDataset=$BIGQUERYDATASET
+              --project=$PROJECT
+              --resourceNameMode=$RESOURCENAMEMODE
+              --exportSummaryToBigQuery=$EXPORTSUMMARYTOBIGQUERY
+              --tempLocation=$TEMPLOCATION
+              --influxDatabase=$INFLUXDATABASE
+              --influxHost=$INFLUXHOST
+              --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT
+              --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB
+              --influxRetentionPolicy=$INFLUXRETENTIONPOLICY
               --streaming=false 
               --suite=SMOKE 
               --manageResources=false 
