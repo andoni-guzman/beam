@@ -32,7 +32,7 @@ on:
 jobs:
   java-postcommit-nexmark-direct:
     name: Run PostCommit Java Nexmark - runner
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
     timeout-minutes: 120
