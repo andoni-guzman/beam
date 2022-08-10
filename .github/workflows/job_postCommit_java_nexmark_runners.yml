@@ -29,32 +29,31 @@ on:
     paths: []
 
 jobs:
-
-  variables:
-  - name: bigQueryTable
-    value: nexmark
-  - name: bigQueryDataset
-    value: nexmark
-  - name: project
-    value: apache-beam-testing
-  - name: resourceNameMode
-    value: QUERY_RUNNER_AND_MODE
-  - name: exportSummaryToBigQuery
-    value: true
-  - name: tempLocation
-    value: gs://temp-storage-for-perf-tests/nexmark
-  - name: influxDatabase
-    value: beam_test_metrics
-  - name: influxHost
-    value: http://10.128.0.96:8086 
-  - name: baseInfluxMeasurement
-    value: nexmark
-  - name: exportSummaryToInfluxDB
-    value: true
-  - name: influxRetentionPolicy
-    value: forever
-
   java-postcommit-nexmark-direct:
+    variables:
+      - name: bigQueryTable
+        value: nexmark
+      - name: bigQueryDataset
+        value: nexmark
+      - name: project
+        value: apache-beam-testing
+      - name: resourceNameMode
+        value: QUERY_RUNNER_AND_MODE
+      - name: exportSummaryToBigQuery
+        value: true
+      - name: tempLocation
+        value: gs://temp-storage-for-perf-tests/nexmark
+      - name: influxDatabase
+        value: beam_test_metrics
+      - name: influxHost
+        value: http://10.128.0.96:8086 
+      - name: baseInfluxMeasurement
+        value: nexmark
+      - name: exportSummaryToInfluxDB
+        value: true
+      - name: influxRetentionPolicy
+        value: forever
+        
     name: Run PostCommit Java Nexmark - runner
     runs-on: self-hosted
     strategy:
