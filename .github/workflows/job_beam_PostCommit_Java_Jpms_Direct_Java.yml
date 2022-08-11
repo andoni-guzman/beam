@@ -73,7 +73,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'temurin'
       
       - name: Run :sdks:java:testing:jpms-tests:directRunnerIntegrationTest
         uses: ./.github/actions/gradle-command-self-hosted-action
