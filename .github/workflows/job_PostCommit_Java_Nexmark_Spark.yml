@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-name: PostCommit Java Nexmark  Spark
+name: PostCommit Java Nexmark Spark
 
 on:
   workflow_dispatch:
@@ -122,7 +122,7 @@ jobs:
               --suite=SMOKE 
               --manageResources=false 
               --monitorJobs=true "
-      - name: *** RUN NEXMARK SQL IN BATCH MODE USING SPARK 3 RUNNER ***
+      - name:  RUN ***  NEXMARK SQL IN BATCH MODE USING SPARK 3 RUNNER ***
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
