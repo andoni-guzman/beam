@@ -83,5 +83,7 @@ jobs:
               --enforceEncodability=true 
               --enforceImmutability=true 
               --runner=DataflowRunner 
+              --monitorJobs=true 
+              --manageResources=false
               --streaming=false " 
               
