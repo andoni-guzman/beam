@@ -109,7 +109,7 @@ jobs:
               --nexmarkParallel=16 
               --streaming=true 
               --suite=STRESS 
-              --manageResources=alse 
+              --manageResources=false 
               --monitorJobs=true 
               --enforceEncodability=true 
               --enforceImmutability=true " 
