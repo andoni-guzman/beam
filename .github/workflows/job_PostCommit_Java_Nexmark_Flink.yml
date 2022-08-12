@@ -40,6 +40,7 @@ env:
   BASEINFLUXMEASUREMENT: nexmark
   EXPORTSUMMARYTOINFLUXDB: true
   INFLUXRETENTIONPOLICY: forever
+  FLINKVERSION: 1.13
 
 jobs:
   java-postcommit-nexmark-direct:
@@ -59,7 +60,7 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
-            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink 
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink:$FLINKVERSION 
             -Pnexmark.args=" 
               --runner=FlinkRunner 
               --bigQueryTable=$BIGQUERYTABLE
@@ -81,7 +82,7 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
-            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink 
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink:$FLINKVERSION
             -Pnexmark.args=" 
               --runner=FlinkRunner 
               --bigQueryTable=$BIGQUERYTABLE
@@ -103,7 +104,7 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
-            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink 
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink:$FLINKVERSION 
             -Pnexmark.args=" 
               --runner=FlinkRunner 
               --bigQueryTable=$BIGQUERYTABLE
@@ -126,7 +127,7 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
-            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink 
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink:$FLINKVERSION 
             -Pnexmark.args=" 
               --runner=FlinkRunner 
               --bigQueryTable=$BIGQUERYTABLE
@@ -149,7 +150,7 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
-            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink 
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink:$FLINKVERSION 
             -Pnexmark.args=" 
               --runner=FlinkRunner 
               --bigQueryTable=$BIGQUERYTABLE
@@ -172,7 +173,7 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
-            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink 
+            :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:flink:$FLINKVERSION 
             -Pnexmark.args=" 
               --runner=FlinkRunner 
               --bigQueryTable=$BIGQUERYTABLE
