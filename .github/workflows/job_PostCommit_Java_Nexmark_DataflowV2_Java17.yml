@@ -40,6 +40,7 @@ env:
   BASEINFLUXMEASUREMENT: nexmark
   EXPORTSUMMARYTOINFLUXDB: true
   INFLUXRETENTIONPOLICY: forever
+  INFLUXTAGS: '{"runnerVersion":"V2","javaVersion":"17"}'
 
 jobs:
   java-postcommit-nexmark-direct:
@@ -72,7 +73,7 @@ jobs:
               --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT
               --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB
               --influxRetentionPolicy=$INFLUXRETENTIONPOLICY
-              --influxTags='{"runnerVersion":"V2","javaVersion":"17"}' 
+              --influxTags=$INFLUXTAGS
               --region=us-central1 
               --suite=STRESS 
               --numWorkers=4 
