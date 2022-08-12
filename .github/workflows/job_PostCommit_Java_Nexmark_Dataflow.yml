@@ -60,8 +60,7 @@ jobs:
         with:
           gradle-command: >
             :sdks:java:testing:nexmark:run -Pnexmark.runner=:runners:google-cloud-dataflow-java
-            -Pnexmark.args=" 
-              --runner=SparkRunner 
+            -Pnexmark.args="  
               --bigQueryTable=$BIGQUERYTABLE
               --bigQueryDataset=$BIGQUERYDATASET
               --project=$PROJECT
