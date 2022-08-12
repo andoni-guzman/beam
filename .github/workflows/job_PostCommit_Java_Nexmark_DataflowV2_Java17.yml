@@ -44,7 +44,7 @@ env:
 
 jobs:
   java-postcommit-nexmark-direct:
-    name: Run PostCommit Java Nexmark - Dataflow V2 
+    name: Run PostCommit Java Nexmark - Dataflow V2 - JAVA 17
     runs-on: self-hosted
     strategy:
       fail-fast: true

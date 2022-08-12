@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-name: PostCommit Java Nexmark Dataflow V2
+name: PostCommit Java Nexmark Dataflow V2 - JAVA 11
 
 on:
   workflow_dispatch:
