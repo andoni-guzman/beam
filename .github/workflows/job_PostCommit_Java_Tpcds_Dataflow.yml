@@ -29,20 +29,7 @@ on:
     paths: []
 
 jobs:
-  set-properties:
-    runs-on: self-hosted
-    outputs:
-      properties: ${{ steps.test-properties.outputs.properties }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-          submodules: recursive
-      - id: test-properties
-        uses: ./.github/actions/setup-default-test-properties
-
-  java-postcommit-nexmark-direct:
+  java-postcommit-tpcds-dataflow:
     name: Run PostCommit Java Tpcds Dataflow 
     runs-on: self-hosted
     strategy:
@@ -54,9 +41,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-
+      - name: Setup environment
+        uses: ./.github/actions/setup-self-hosted-action 
       - name: Run *** RUN TPCDS IN BATCH MODE USING DATAFLOW RUNNER ***
-        uses: ./.github/actions/setup-self-hosted-action
+        uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
             :sdks:java:testing:tpcds:run

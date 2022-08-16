@@ -28,21 +28,8 @@ on:
     tags: 'v*'
     paths: []
 
-jobs:
-  set-properties:
-    runs-on: self-hosted
-    outputs:
-      properties: ${{ steps.test-properties.outputs.properties }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-          submodules: recursive
-      - id: test-properties
-        uses: ./.github/actions/setup-default-test-properties
-        
-  java-postcommit-nexmark-direct:
+jobs:      
+  java-postcommit-tpcds-spark:
     name: Run PostCommit Java Tpcds Spark 
     runs-on: self-hosted
     strategy:
@@ -55,8 +42,10 @@ jobs:
           persist-credentials: false
           submodules: recursive
 
+      - name: Setup environment
+        uses: ./.github/actions/setup-self-hosted-action 
       - name: Run *** RUN TPCDS IN BATCH MODE USING SPARK RUNNER ***
-        uses: ./.github/actions/setup-self-hosted-action
+        uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
             :sdks:java:testing:tpcds:run
