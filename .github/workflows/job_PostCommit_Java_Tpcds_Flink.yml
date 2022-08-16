@@ -29,6 +29,19 @@ on:
     paths: []
 
 jobs:
+  set-properties:
+    runs-on: self-hosted
+    outputs:
+      properties: ${{ steps.test-properties.outputs.properties }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          submodules: recursive
+      - id: test-properties
+        uses: ./.github/actions/setup-default-test-properties
+        
   java-postcommit-nexmark-direct:
     name: Run PostCommit Java Tpcds Flink 
     runs-on: self-hosted
