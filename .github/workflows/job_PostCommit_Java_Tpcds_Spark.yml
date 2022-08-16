@@ -56,7 +56,7 @@ jobs:
           submodules: recursive
 
       - name: Run *** RUN TPCDS IN BATCH MODE USING SPARK RUNNER ***
-        uses: ./.github/actions/gradle-command-self-hosted-action
+        uses: ./.github/actions/setup-self-hosted-action
         with:
           gradle-command: >
             :sdks:java:testing:tpcds:run
