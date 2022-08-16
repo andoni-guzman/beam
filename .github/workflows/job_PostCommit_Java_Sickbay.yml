@@ -54,8 +54,9 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-
+      - name: Setup environment
+        uses: ./.github/actions/setup-self-hosted-action
       - name: Run :javaPostCommitSickbay
-        uses: ./.github/actions/gradle-command-self-hosted-action/
+        uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: :javaPostCommitSickbay
