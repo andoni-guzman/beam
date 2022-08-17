@@ -15,18 +15,18 @@
 
 
 name: PostCommit Java Sickbay
-
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 */6 * * *'
-  push:
-    branches: ['master', 'release-*']
-    tags: 'v*'
-  pull_request:
-    branches: ['master', 'release-*']
-    tags: 'v*'
-    paths: []
+#Disable in original jenkins job
+#on:
+#  workflow_dispatch:
+#  schedule:
+#    - cron: '0 */6 * * *'
+#  push:
+#    branches: ['master', 'release-*']
+#    tags: 'v*'
+#  pull_request:
+#    branches: ['master', 'release-*']
+#    tags: 'v*'
+#    paths: []
 
 jobs:
   java-postcommit-sickbay:
