@@ -27,7 +27,9 @@ on:
     branches: ['master', 'release-*']
     tags: 'v*'
     paths: []
-
+env:
+  USER: beam-sdk
+  
 jobs:
   postCommit-py-valcont:
     name: Run PostCommit Py Valcont 
