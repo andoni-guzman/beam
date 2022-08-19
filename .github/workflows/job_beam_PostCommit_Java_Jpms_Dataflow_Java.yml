@@ -30,7 +30,7 @@ on:
 
 
 jobs:
-  java-postcommit-jpbs-java11:
+  java-postcommit-jpbs-java11-dataflow:
     name: Run PostCommit Java JPBS Dataflow - Java 11
     runs-on: self-hosted
     strategy:
@@ -54,7 +54,7 @@ jobs:
           gradle-command: >- 
           :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest 
           -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
-  java-postcommit-jpbs-java17:
+  java-postcommit-jpbs-java17-dataflow:
     name: Run PostCommit Java JPBS Dataflow - Java 17
     runs-on: self-hosted
     strategy:
