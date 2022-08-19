@@ -51,9 +51,9 @@ jobs:
       - name: Run :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: >- 
-          :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest 
-          -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
+          gradle-command: >-
+            :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest 
+            -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
   java-postcommit-jpbs-java17-dataflow:
     name: Run PostCommit Java JPBS Dataflow - Java 17
     runs-on: self-hosted
