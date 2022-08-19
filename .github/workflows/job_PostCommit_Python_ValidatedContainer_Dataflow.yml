@@ -29,14 +29,13 @@ on:
     paths: []
 env:
   USER: beam-sdk
-  
 jobs:
   postCommit-py-valcont:
     name: Run PostCommit Py Valcont 
     runs-on: self-hosted
     strategy:
       fail-fast: true
-    timeout-minutes: 120
+    timeout-minutes: 200
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
