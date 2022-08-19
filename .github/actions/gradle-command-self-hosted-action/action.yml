@@ -27,8 +27,8 @@ inputs:
   default-arguments:
     required: false
     description: 'Default gradle switches' # Copied from CommonJobProperties.groovy'
-    default: |
-      --continue -Dorg.gradle.jvmargs=-Xms2g -Dorg.gradle.jvmargs=-Xmx6g \
+    default: >
+      --continue -Dorg.gradle.jvmargs=-Xms2g -Dorg.gradle.jvmargs=-Xmx6g 
       -Dorg.gradle.vfs.watch=false -Pdocker-pull-licenses
   max-workers:
     required: false
@@ -40,6 +40,6 @@ runs:
   steps:
     - name: Run Gradle Command
       shell: bash
-      run: |
-        ./gradlew ${{ inputs.gradle-command }} --max-workers=${{ inputs.max-workers }} ${{ inputs.arguments }} \
+      run: >
+        ./gradlew ${{ inputs.gradle-command }} --max-workers=${{ inputs.max-workers }} ${{ inputs.arguments }} 
         ${{ inputs.default-arguments }}
