@@ -79,14 +79,14 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
-          :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest
-            -PskipCheckerFramework
-            -PcompileAndRunTestsWithJava17
-            -Dorg.gradle.jvmargs=-Xms2g
-            -Dorg.gradle.jvmargs=-Xmx6g
-            -Dorg.gradle.vfs.watch=false
-            -Pdocker-pull-licenses 
-            -PskipCheckerFramework 
-            -PcompileAndRunTestsWithJava17 
-            -Pjava17Home=/usr/lib/jvm/java-17-openjdk-amd64
-            -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
+            :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest
+              -PskipCheckerFramework
+              -PcompileAndRunTestsWithJava17
+              -Dorg.gradle.jvmargs=-Xms2g
+              -Dorg.gradle.jvmargs=-Xmx6g
+              -Dorg.gradle.vfs.watch=false
+              -Pdocker-pull-licenses 
+              -PskipCheckerFramework 
+              -PcompileAndRunTestsWithJava17 
+              -Pjava17Home=/usr/lib/jvm/java-17-openjdk-amd64
+              -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
