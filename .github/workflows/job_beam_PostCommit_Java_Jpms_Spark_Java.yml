@@ -48,12 +48,5 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command:  >
-            :sdks:java:testing:jpms-tests:sparkRunnerIntegrationTest
-            --continue 
-            --max-workers=8 
-            -Dorg.gradle.jvmargs=-Xms2g 
-            -Dorg.gradle.jvmargs=-Xmx6g 
-            -Dorg.gradle.vfs.watch=false 
-            -Pdocker-pull-licenses 
-            -Dorg.gradle.java.home=/usr/lib/jvm/java-11-openjdk-amd64 
+            :sdks:java:testing:jpms-tests:sparkRunnerIntegrationTest 
             -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
