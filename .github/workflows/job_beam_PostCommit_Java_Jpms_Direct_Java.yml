@@ -53,8 +53,7 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: >
-            :sdks:java:testing:jpms-tests:directRunnerIntegrationTest 
-            -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4       
+            :sdks:java:testing:jpms-tests:directRunnerIntegrationTest -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
   java-postcommit-jpbs-java17:
     name: Run PostCommit Java JPBS Direct - Java 17
     runs-on: self-hosted
