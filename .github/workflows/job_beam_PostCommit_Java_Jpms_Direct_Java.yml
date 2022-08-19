@@ -52,7 +52,7 @@ jobs:
       - name: Run :sdks:java:testing:jpms-tests:directRunnerIntegrationTest
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: >
+          gradle-command: >-
             :sdks:java:testing:jpms-tests:directRunnerIntegrationTest -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
   java-postcommit-jpbs-java17:
     name: Run PostCommit Java JPBS Direct - Java 17
@@ -75,7 +75,7 @@ jobs:
       - name: Run :sdks:java:testing:jpms-tests:directRunnerIntegrationTest
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: >
+          gradle-command: >-
             :sdks:java:testing:jpms-tests:directRunnerIntegrationTest 
             -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
             -PskipCheckerFramework 

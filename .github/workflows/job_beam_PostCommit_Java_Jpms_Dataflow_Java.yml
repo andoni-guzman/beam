@@ -51,7 +51,7 @@ jobs:
       - name: Run :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: > 
+          gradle-command: >- 
           :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest 
           -Pmaven_home=/home/jenkins/tools/maven/apache-maven-3.5.4 
   java-postcommit-jpbs-java17:
@@ -75,7 +75,7 @@ jobs:
       - name: Run :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: >
+          gradle-command: >-
             :sdks:java:testing:jpms-tests:dataflowRunnerIntegrationTest 
             -PskipCheckerFramework
             -PcompileAndRunTestsWithJava17
