@@ -35,7 +35,7 @@ on:
       ''] 
 
 jobs:
-  postCommit-py-vr-dataflowV2:
+  run-precommit-java-io-clickhouse:
     name: Run Precommit Java IO ClickHouse 
     runs-on: self-hosted
     strategy:
