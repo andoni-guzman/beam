@@ -32,11 +32,11 @@ on:
       'examples/java/**',
       'examples/kotlin/**',
       'release/**',
-      ''] #Test 
+      ''] 
 
 jobs:
   postCommit-py-vr-dataflowV2:
-    name: Run PostCommit Py VR Dataflow V2 
+    name: Run Precommit Java IO ClickHouse 
     runs-on: self-hosted
     strategy:
       fail-fast: true
@@ -49,11 +49,7 @@ jobs:
           submodules: recursive
       - name: Setup environment
         uses: ./.github/actions/setup-self-hosted-action 
-      - name: Google Cloud Dataflow Runner V2 Python ValidatesRunner Tests Batch
+      - name: SDKs Java IO ClickHouse
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: :sdks:python:test-suites:dataflow:validatesRunnerBatchTestsV2
-      - name: Run Google Cloud Dataflow Runner V2 Python ValidatesRunner Tests Streaming
-        uses: ./.github/actions/gradle-command-self-hosted-action
-        with:
-          gradle-command: :sdks:python:test-suites:dataflow:validatesRunnerStreamingTestsV2 
+          gradle-command: :sdks:java:io:clickhouse
