@@ -31,7 +31,8 @@ on:
       'runners/**',
       'examples/java/**',
       'examples/kotlin/**',
-      'release/**']
+      'release/**',
+      ''] #Test 
 
 jobs:
   postCommit-py-vr-dataflowV2:
