@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-name: Precommit Java IO ClickHouse
+name: Precommit Java IO File Based
 
 on:
   workflow_dispatch:
@@ -34,8 +34,8 @@ on:
       'release/**'] 
 
 jobs:
-  run-precommit-java-io-clickhouse:
-    name: Run Precommit Java IO ClickHouse 
+  run-precommit-java-io-filebased:
+    name: Run Precommit Java IO File Based 
     runs-on: self-hosted
     strategy:
       fail-fast: true
@@ -48,7 +48,7 @@ jobs:
           submodules: recursive
       - name: Setup environment
         uses: ./.github/actions/setup-self-hosted-action 
-      - name: SDKs Java IO ClickHouse
+      - name: SDKs Java IO File Based
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: :sdks:java:io:clickhouse:test
+          gradle-command: :sdks:java:io:file-based-io-tests:test

@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-name: Precommit Java IO ClickHouse
+name: Precommit Java IO ElasticSearch
 
 on:
   workflow_dispatch:
@@ -34,8 +34,8 @@ on:
       'release/**'] 
 
 jobs:
-  run-precommit-java-io-clickhouse:
-    name: Run Precommit Java IO ClickHouse 
+  run-precommit-java-io-elasticsearch:
+    name: Run Precommit Java IO ElasticSearch 
     runs-on: self-hosted
     strategy:
       fail-fast: true
@@ -48,7 +48,24 @@ jobs:
           submodules: recursive
       - name: Setup environment
         uses: ./.github/actions/setup-self-hosted-action 
-      - name: SDKs Java IO ClickHouse
+      - name: SDKs Java IO ElasticSearch Test
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
-          gradle-command: :sdks:java:io:clickhouse:test
+          gradle-command: :sdks:java:io:elasticsearch:test
+      - name: SDKs Java IO ElasticSearch-Tests  Test 5
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: :sdks:java:io:elasticsearch-test:elasticsearch-tests-5:test
+      - name: SDKs Java IO ElasticSearch-Tests  Test 6
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: :sdks:java:io:elasticsearch-test:elasticsearch-tests-6:test
+      - name: SDKs Java IO ElasticSearch-Tests  Test 7
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: :sdks:java:io:elasticsearch-test:elasticsearch-tests-7:test
+      - name: SDKs Java IO ElasticSearch-Tests  Test 8
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: :sdks:java:io:elasticsearch-test:elasticsearch-tests-8:test
+      
