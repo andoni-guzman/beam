@@ -31,8 +31,7 @@ on:
       'runners/**',
       'examples/java/**',
       'examples/kotlin/**',
-      'release/**',
-      ''] 
+      'release/**'] 
 
 jobs:
   run-precommit-java-io-googlecloudplatform:
