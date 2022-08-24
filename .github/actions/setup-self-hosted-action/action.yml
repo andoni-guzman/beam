@@ -46,4 +46,4 @@ runs:
       # gradle-command-action plugin and github's provided maven
       # settings.xml file
       shell: bash
-      run: rm ~/.m2/settings.xml 
+      run: rm ~/.m2/settings.xml
