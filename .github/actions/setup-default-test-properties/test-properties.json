@@ -14,4 +14,4 @@
     "JavaTestProperties": {
       "SUPPORTED_CONTAINER_TASKS": ["java8", "java11", "java17"]
     }
-  } 
+  }
