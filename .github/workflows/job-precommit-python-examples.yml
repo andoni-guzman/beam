@@ -120,5 +120,5 @@ jobs:
       - name: Run Examples tests with ${{ matrix.tox-env }} env # Complete tests 
         uses: ./.github/actions/setup-python-tests-action
         with:
-          test-directory: apache_beam/examples${{matrix.tests}}
+          test-directory: apache_beam/examples${{matrix.tests}}.py
           python-version: ${{ env.PYTHON_VERSION }}-${{ matrix.tox-env }}
