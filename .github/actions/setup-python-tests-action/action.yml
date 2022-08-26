@@ -32,17 +32,14 @@ runs:
       uses: ./.github/actions/setup-self-hosted-action
     - name: Setup python env for testing
       shell: bash
+      working-directory: ./sdks/python
       run: |
-        cd sdks/python
         pip install --upgrade pip
         pip install --upgrade setuptools
         pip install -r build-requirements.txt
         pip install -e ".[gcp,test]"
         pip3 install tox
-    - name: Run python tests
+    - name: Run python tests with tox environments
       shell: bash
-      run: cd sdks/python && tox -e ${{ inputs.python-version }} -- ${{ inputs.test-directory }} 
-    #Test
-    - name: Run python tests cython
-      shell: bash
-      run: cd sdks/python && tox -e py38-cython -- ${{ inputs.test-directory }}
+      working-directory: ./sdks/python
+      run: tox -e ${{ inputs.python-version }} -- ${{ inputs.test-directory }}
