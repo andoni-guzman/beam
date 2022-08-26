@@ -109,7 +109,6 @@ jobs:
                 'streaming_wordcount_debugging_test',
                 'wordcount_debugging_test',
                 'wordcount_minimal_test' ]
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -118,9 +117,8 @@ jobs:
           submodules: recursive
       - name: Set python version
         run: echo "PYTHON_VERSION=$(echo py${{ matrix.version }} | sed -e 's/\.//g')" >> $GITHUB_ENV
-      - name: Run Examples Autocomplete tests with ${{ matrix.tox-env }} env # Complete tests 
+      - name: Run Examples tests with ${{ matrix.tox-env }} env # Complete tests 
         uses: ./.github/actions/setup-python-tests-action
         with:
           test-directory: apache_beam/examples${{matrix.tests}}
           python-version: ${{ env.PYTHON_VERSION }}-${{ matrix.tox-env }}
-          
