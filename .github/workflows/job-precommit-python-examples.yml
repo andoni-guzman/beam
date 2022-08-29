@@ -55,60 +55,15 @@ jobs:
       matrix:
         version: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.ALL_SUPPORTED_VERSIONS}}
         tox-env: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.TOX_ENV}}
-        tests: ['/complete/autocomplete_test',                         # Completed test
-                '/complete/distribopt_test',
-                '/complete/estimate_pi_test',
-                '/complete/tfidf_test',
-                '/complete/top_wikipedia_sessions_test',
-                '/complete/game/game_stats_test',
-                '/complete/game/hourly_team_score_test',
-                '/complete/game/leader_board_test',
-                '/complete/game/user_score_test',
-                '/complete/juliaset/juliaset/juliaset_test'] # Test
-                #'/cookbook/bigquery_side_input_test',                   # Cookbook
-                #'/cookbook/bigquery_tornadoes_test',
-                #'/cookbook/bigquery_coders_test',
-                #'/cookbook/combiners_test',
-                #'/cookbook/custom_ptransform_test',
-                #'/cookbook/filters_test',
-                #'/cookbook/group_with_coder_test',
-                #'/cookbook/mergecontacts_test',
-                #'/cookbook/multiple_output_pardo_test',
-                #'/dataframe/taxiride_test',                             # Dataframe
-                #'/dataframe/wordcount_test',              
-                #'/snippets/transforms/aggregation/cogroupbykey_test',   #Snippets
-                #'/snippets/transforms/aggregation/combineglobally_test',
-                #'/snippets/transforms/aggregation/combineperket_test',
-                #'/snippets/transforms/aggregation/combinevalues_test',
-                #'/snippets/transforms/aggregation/count_test',
-                #'/snippets/transforms/aggregation/distinct_test',
-                #'/snippets/transforms/aggregation/groupbykey_test',
-                #'/snippets/transforms/aggregation/groupintobatches_test',
-                #'/snippets/transforms/aggregation/latest_test',
-                #'/snippets/transforms/aggregation/max_test',
-                #'/snippets/transforms/aggregation/mean_test',
-                #'/snippets/transforms/aggregation/min_test',
-                #'/snippets/transforms/aggregation/sample_test',
-                #'/snippets/transforms/aggregation/sum_test',
-                #'/snippets/transforms/aggregation/top_test',
-                #'/snippets/transforms/elementwise/filter_test',
-                #'/snippets/transforms/elementwise/flatmap_test',
-                #'/snippets/transforms/elementwise/keys_test',
-                #'/snippets/transforms/elementwise/kvswap_test',
-                #'/snippets/transforms/elementwise/map_test',
-                #'/snippets/transforms/elementwise/pardo_test',
-                #'/snippets/transforms/elementwise/partition_test',
-                #'/snippets/transforms/elementwise/regex_test',
-                #'/snippets/transforms/elementwise/runinference_test',
-                #'/snippets/transforms/elementwise/tostring_test',
-                #'/snippets/transforms/elementwise/values_test',
-                #'/snippets/transforms/elementwise/withtimestamps_test',
-                #'/snippets/transforms/util_test',
-                #'/snippets/transforms/elementwise/',
-                #'matrix_power_test',                                    # Root
-                #'streaming_wordcount_debugging_test',
-                #'wordcount_debugging_test',
-                #'wordcount_minimal_test' ]
+        tests: ['/complete/*_test',                         # Completed test
+                '/complete/game/*_test',
+                '/complete/juliaset/juliaset/*_test',         # Test
+                '/cookbook/*_test',                           # Cookbook
+                '/dataframe/*_test',                          # Dataframe
+                '/snippets/transforms/aggregation/*_test',    #Snippets
+                '/snippets/transforms/elementwise/*_test', 
+                '*_test']                                     # Root
+        
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -120,5 +75,5 @@ jobs:
       - name: Run Examples tests with ${{ matrix.tox-env }} env # Complete tests 
         uses: ./.github/actions/setup-python-tests-action
         with:
-          test-directory: apache_beam/examples${{matrix.tests}}.py
+          test-directory: apache_beam/examples${{matrix.tests}}.py  
           python-version: ${{ env.PYTHON_VERSION }}-${{ matrix.tox-env }}
