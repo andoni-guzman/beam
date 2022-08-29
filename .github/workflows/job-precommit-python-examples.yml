@@ -52,6 +52,9 @@ jobs:
     runs-on: self-hosted
     strategy:
       fail-fast: false
+      matrix:
+        version: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.ALL_SUPPORTED_VERSIONS}}
+        tox-env: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.TOX_ENV}}
         tests: ['/complete/*_test',                           # Completed test
                 '/complete/game/*_test',
                 '/complete/juliaset/juliaset/*_test',         # Test
@@ -67,8 +70,8 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - name: Run Examples tests  
+      - name: Run Examples tests 
         uses: ./.github/actions/setup-python-tests-action
         with:
           test-directory: apache_beam/examples${{matrix.tests}}.py
-
+          
