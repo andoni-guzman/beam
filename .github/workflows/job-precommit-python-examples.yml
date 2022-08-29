@@ -55,14 +55,14 @@ jobs:
       matrix:
         version: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.ALL_SUPPORTED_VERSIONS}}
         tox-env: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.TOX_ENV}}
-        tests: ['/complete/*_test',                         # Completed test
+        tests: ['/complete/*_test',                           # Completed test
                 '/complete/game/*_test',
                 '/complete/juliaset/juliaset/*_test',         # Test
                 '/cookbook/*_test',                           # Cookbook
                 '/dataframe/*_test',                          # Dataframe
-                '/snippets/transforms/aggregation/*_test',    #Snippets
+                '/snippets/transforms/aggregation/*_test',    # Snippets
                 '/snippets/transforms/elementwise/*_test', 
-                '*_test']                                     # Root
+                '/*_test']                                     # Root
         
     steps:
       - name: Checkout code
