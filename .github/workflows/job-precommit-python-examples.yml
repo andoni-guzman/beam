@@ -53,6 +53,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        tox-env: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.TOX_ENV}}
         tests: ['/complete/*_test',                           # Completed test
                 '/complete/game/*_test',
                 '/complete/juliaset/juliaset/*_test',         # Test
