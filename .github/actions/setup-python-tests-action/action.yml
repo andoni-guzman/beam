@@ -39,8 +39,7 @@ runs:
         pip install -r build-requirements.txt
         pip install -e ".[gcp,test]"
         sudo apt-get update
-        sudo apt-get --assume-yes install libpython3.7-dev
-        sudo apt-get --assume-yes install python-dev
+        pip install python-dev-tools --user --upgrade
         pip3 install tox
     - name: Run python tests with tox environments
       shell: bash
