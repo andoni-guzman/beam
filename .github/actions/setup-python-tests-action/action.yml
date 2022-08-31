@@ -38,9 +38,7 @@ runs:
         pip install --upgrade setuptools
         pip install -r build-requirements.txt
         pip install -e ".[gcp,test]"
-        pip3 install tox
-        pip install tox
-        
+        pip3 install tox        
     - name: Run python tests with tox environments
       shell: bash
       working-directory: ./sdks/python
