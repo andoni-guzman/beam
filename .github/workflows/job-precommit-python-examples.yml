@@ -53,15 +53,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #tox-env: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.TOX_ENV}}
-        tests: ['/complete/*_test']                            # Completed test
-                #'/complete/game/*_test',
-                #'/complete/juliaset/juliaset/*_test',         # Test
-                #'/cookbook/*_test',                           # Cookbook
-                #'/dataframe/*_test',                          # Dataframe
-                #'/snippets/transforms/aggregation/*_test',    # Snippets
-                #'/snippets/transforms/elementwise/*_test', 
-                #'/*_test']                                     # Root
+        tox-env: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.TOX_ENV}}
+        tests: ['/complete/*_test']                           # Completed test
+                '/complete/game/*_test',
+                '/complete/juliaset/juliaset/*_test',         # Test
+                '/cookbook/*_test',                           # Cookbook
+                '/dataframe/*_test',                          # Dataframe
+                '/snippets/transforms/aggregation/*_test',    # Snippets
+                '/snippets/transforms/elementwise/*_test', 
+                '/*_test']                                    # Root
         
     steps:
       - name: Checkout code
@@ -72,6 +72,6 @@ jobs:
       - name: Run Examples tests 
         uses: ./.github/actions/setup-python-tests-action
         with:
-          #python-version: ${{ matrix.tox-env }}
+          python-version: ${{ matrix.tox-env }}
           test-directory: apache_beam/examples${{matrix.tests}}.py
           
