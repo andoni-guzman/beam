@@ -10,7 +10,7 @@
     "LOAD_TEST_PYTHON_VERSION": "3.7",
     "CHICAGO_TAXI_EXAMPLE_FLINK_PYTHON_VERSION": "3.7",
     "DEFAULT_INTERPRETER": "python3.8",
-    "TOX_ENV": ["\"py{37,38,39}-cloud\"","\"py{37,38,39}-cython\""]
+    "TOX_ENV": ["\"py{37,38,39}-cython\""]
   },
   "JavaTestProperties": {
     "SUPPORTED_CONTAINER_TASKS": ["java8", "java11", "java17"]
