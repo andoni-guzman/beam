@@ -54,7 +54,7 @@ jobs:
       fail-fast: false
       matrix:
         tox-env: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.TOX_ENV}}
-        tests: ['/complete/*_test']                           # Completed test
+        tests: ['/complete/*_test',                           # Completed test
                 '/complete/game/*_test',
                 '/complete/juliaset/juliaset/*_test',         # Test
                 '/cookbook/*_test',                           # Cookbook
@@ -74,4 +74,3 @@ jobs:
         with:
           python-version: ${{ matrix.tox-env }}
           test-directory: apache_beam/examples${{matrix.tests}}.py
-          
