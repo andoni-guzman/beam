@@ -171,7 +171,7 @@ if __name__ == '__main__':
   # be able to parse it.
   setuptools.setup(
       name=PACKAGE_NAME,
-      version=PACKAGE_VERSION,
+      version="2.40.0",
       description=PACKAGE_DESCRIPTION,
       long_description=PACKAGE_LONG_DESCRIPTION,
       url=PACKAGE_URL,
