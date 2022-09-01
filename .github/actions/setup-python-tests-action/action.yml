@@ -42,4 +42,4 @@ runs:
     - name: Run python tests with tox environments
       shell: bash
       working-directory: ./sdks/python
-      run: tox -r -e ${{ inputs.python-version }} -- ${{ inputs.test-directory }}
+      run: tox -c tox.ini --develop -e ${{ inputs.python-version }} -- ${{ inputs.test-directory }}
