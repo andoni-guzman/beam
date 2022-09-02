@@ -69,11 +69,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - name: Run Examples tests 
-        uses: ./.github/actions/setup-python-tests-action
-        with:
-          python-version: ${{ matrix.tox-env }}
-          test-directory: apache_beam/examples${{matrix.tests}}.py
       - name: Set python version and tox env
         run: |
           echo "PYTHON_VERSION=$(echo ${{ matrix.version }} | sed -e 's/\.//g')" >> $GITHUB_ENV
