@@ -61,7 +61,7 @@ jobs:
                 #"apache_beam/examples/cookbook/",  
                 #"apache_beam/examples/dataframe/",
                 "apache_beam/examples/snippets/transforms/aggregation/",
-                "apache_beam/examples/snippets/transforms/elementwise/"
+                "apache_beam/examples/snippets/transforms/elementwise/"]
                 #"apache_beam/examples/"]
         
     steps:
