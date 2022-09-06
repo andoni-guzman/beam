@@ -63,7 +63,7 @@ jobs:
                 "apache_beam/examples/cookbook/*_test.py",  
                 "apache_beam/examples/dataframe/*_test.py",
                 "apache_beam/examples/snippets/transforms/aggregation/*_test.py",
-                "apache_beam/examples/snippets/transforms/elementwise/*_test.py"]
+                "apache_beam/examples/snippets/transforms/elementwise/*_test.py",
                 "apache_beam/examples/*_test.py"]
         
     steps:
