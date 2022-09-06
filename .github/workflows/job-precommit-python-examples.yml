@@ -57,12 +57,12 @@ jobs:
       fail-fast: false
       matrix:
         version: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.ALL_SUPPORTED_VERSIONS}}
-        tests: ["apache_beam/examples/complete/",
-                "apache_beam/examples/cookbook/",  
-                "apache_beam/examples/dataframe/",
-                "apache_beam/examples/snippets/aggregation/",
-                "apache_beam/examples/snippets/elementwise/",
-                "apache_beam/examples/"]
+        tests: [ #"apache_beam/examples/complete/",
+                #"apache_beam/examples/cookbook/",  
+                #"apache_beam/examples/dataframe/",
+                "apache_beam/examples/snippets/transforms/aggregation/",
+                "apache_beam/examples/snippets/transforms/elementwise/"
+                #"apache_beam/examples/"]
         
     steps:
       - name: Checkout code
