@@ -79,12 +79,13 @@ jobs:
         uses: ./.github/actions/setup-self-hosted-action
       - name: Run :sdks:python:test-suites:tox:${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cloud
         shell: bash
-        run: "./gradlew \ 
-              :sdks:python:test-suites:tox:py${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cloud \
-              --max-workers=8 \
-              -Pposargs=${{matrix.tests}} \
-              --continue -Dorg.gradle.jvmargs=-Xms2g -Dorg.gradle.jvmargs=-Xmx6g \
-              -Dorg.gradle.vfs.watch=false -Pdocker-pull-licenses"
+        run: >
+              ./gradlew 
+              :sdks:python:test-suites:tox:py${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cloud 
+              --max-workers=8 
+              -Pposargs=${{matrix.tests}} 
+              --continue -Dorg.gradle.jvmargs=-Xms2g -Dorg.gradle.jvmargs=-Xmx6g 
+              -Dorg.gradle.vfs.watch=false -Pdocker-pull-licenses
       - name: Run :sdks:python:test-suites:tox:${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cython
         shell: bash
         run: "./gradlew \ 
