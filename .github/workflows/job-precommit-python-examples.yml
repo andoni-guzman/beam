@@ -57,7 +57,7 @@ jobs:
       fail-fast: false
       matrix:
         version: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.ALL_SUPPORTED_VERSIONS}}
-        tests: ["apache_beam/examples/complete/game/ \
+        tests: [\"apache_beam/examples/complete/game/ \
                 apache_beam/examples/complete/autocomplete_test.py \
                 apache_beam/examples/complete/distribopt_test.py \
                 apache_beam/examples/complete/estimate_pi_test.py \
@@ -72,7 +72,7 @@ jobs:
                 apache_beam/examples/straming_wordcount_debugging_test.py \ 
                 apache_beam/examples/wordcout_debugging_test.py \ 
                 apache_beam/examples/wordcout_minimal_test.py \ 
-                apache_beam/examples/wordcout_test.py"]
+                apache_beam/examples/wordcout_test.py\"]
         
     steps:
       - name: Checkout code
@@ -96,3 +96,7 @@ jobs:
           gradle-command: :sdks:python:test-suites:tox:py${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cython
           arguments: "-Pposargs=${{matrix.tests}}"
 
+
+./gradlew :sdks:python:test-suites:tox:py38:testPy38Cloud --max-workers=8 -Pposargs="apache_beam/examples/complete/game/ apache_beam/examples/complete/autocomplete_test.py apache_beam/examples/complete/distribopt_test.py apache_beam/examples/complete/estimate_pi_test.py apache_beam/examples/complete/tfidf_test.py apache_beam/examples/complete/top_wikipedia_sessions_test.py apache_beam/examples/complete/juliaset/ apache_beam/examples/cookbook/   apache_beam/examples/dataframe/ apache_beam/examples/snippets/transforms/aggregation/ apache_beam/examples/snippets/transforms/elementwise/ apache_beam/examples/matrix_power_test.py   apache_beam/examples/straming_wordcount_debugging_test.py   apache_beam/examples/wordcout_debugging_test.py   apache_beam/examples/wordcout_minimal_test.py  apache_beam/examples/wordcout_test.py" \
+  --continue -Dorg.gradle.jvmargs=-Xms2g -Dorg.gradle.jvmargs=-Xmx6g \
+  -Dorg.gradle.vfs.watch=false -Pdocker-pull-licenses
