@@ -29,7 +29,6 @@ on:
   pull_request:
     branches: ['master', 'release-*']
     tags: 'v*'
-    paths
 #    paths: ['sdks/python/apache_beam/examples/**',
 #      'sdks/python/apache_beam/examples/**']
 
