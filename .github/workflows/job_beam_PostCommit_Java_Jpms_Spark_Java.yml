@@ -23,10 +23,11 @@ on:
   push:
     branches: ['master', 'release-*']
     tags: 'v*'
-  pull_request:
+  pull_request_target:
     branches: ['master', 'release-*']
-    tags: 'v*'
+    tags: ['v*']
     paths: []
+permissions: read-all
 
 
 jobs:
