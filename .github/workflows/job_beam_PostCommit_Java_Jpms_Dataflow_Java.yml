@@ -25,7 +25,6 @@ on:
   push:
     branches: ['master', 'release-*']
     tags: ['v*']
-permissions: read-all
 
 jobs:
   java-postcommit-jpbs-java11-dataflow:
