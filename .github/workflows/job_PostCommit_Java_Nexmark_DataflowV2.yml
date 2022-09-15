@@ -22,11 +22,8 @@ on:
     - cron: '0 */6 * * *'
   push:
     branches: ['master', 'release-*']
-    tags: 'v*'
-  pull_request:
-    branches: ['master', 'release-*']
-    tags: 'v*'
-    paths: []
+    tags: ['v*']
+permissions: read-all
 
 env:
   BIGQUERYTABLE: nexmark
@@ -40,7 +37,7 @@ env:
   BASEINFLUXMEASUREMENT: nexmark
   EXPORTSUMMARYTOINFLUXDB: true
   INFLUXRETENTIONPOLICY: forever
-  INFLUXTAGS: '{"runnerVersion":"V2","javaVersion":"8"}'
+
 
 jobs:
   java-postcommit-nexmark-direct:
@@ -48,7 +45,12 @@ jobs:
     runs-on: self-hosted
     strategy:
       fail-fast: true
+      matrix: 
+      INFLUXTAGS: ['{"runnerVersion":"V2","javaVersion":"8"}',
+                   '{"runnerVersion":"V2","javaVersion":"11"}',
+                   '{"runnerVersion":"V2","javaVersion":"17"}']
     timeout-minutes: 240
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -73,7 +75,7 @@ jobs:
               --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT
               --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB
               --influxRetentionPolicy=$INFLUXRETENTIONPOLICY
-              --influxTags=$INFLUXTAGS
+              --influxTags=${{matrix.INFLUXTAGS}}
               --region=us-central1 
               --suite=STRESS 
               --numWorkers=4 
@@ -85,5 +87,4 @@ jobs:
               --runner=DataflowRunner 
               --monitorJobs=true 
               --manageResources=false
-              --streaming=false " 
-              
+              --streaming=false "
