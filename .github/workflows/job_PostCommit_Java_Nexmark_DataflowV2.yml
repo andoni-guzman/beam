@@ -46,9 +46,9 @@ jobs:
     strategy:
       fail-fast: true
       matrix: 
-      INFLUXTAGS: ['{"runnerVersion":"V2","javaVersion":"8"}',
-                   '{"runnerVersion":"V2","javaVersion":"11"}',
-                   '{"runnerVersion":"V2","javaVersion":"17"}']
+        INFLUXTAGS: ['{"runnerVersion":"V2","javaVersion":"8"}',
+                    '{"runnerVersion":"V2","javaVersion":"11"}',
+                    '{"runnerVersion":"V2","javaVersion":"17"}']
     timeout-minutes: 240
 
     steps:
