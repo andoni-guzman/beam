@@ -50,14 +50,13 @@ jobs:
                     '{"runnerVersion":"V2","javaVersion":"11"}',
                     '{"runnerVersion":"V2","javaVersion":"17"}']
     timeout-minutes: 240
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           persist-credentials: false
           submodules: recursive
-        - id: test-properties
+      - id: test-properties
         uses: ./.github/actions/setup-default-test-properties
 
       - name: Run *** RUN NEXMARK IN BATCH MODE USING DATAFLOW RUNNER ***
