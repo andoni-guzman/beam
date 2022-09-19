@@ -43,8 +43,7 @@ env:
   INFLUXRETENTIONPOLICY: forever
   INFLUXTAGSJAVA8: '{"runnerVersion":"V2","javaVersion":"8"}'
   INFLUXTAGSJAVA11: '{"runnerVersion":"V2","javaVersion":"11"}'
-  INFLUXTAGSJAVA17: '{"runnerVersion":"V2","javaVersion":"17"}'
-  
+  INFLUXTAGSJAVA17: '{"runnerVersion":"V2","javaVersion":"17"}'  
 
 jobs:
   java-postcommit-nexmark-dataflowv2:
@@ -92,35 +91,35 @@ jobs:
               --monitorJobs=true 
               --manageResources=false "
       - name: Run *** RUN NEXMARK IN BATCH MODE USING DATAFLOW RUNNER JAVA 11 ***
-      uses: ./.github/actions/gradle-command-self-hosted-action
-      with:
-        gradle-command: >
-          :sdks:java:testing:nexmark:run -Pnexmark.runner.version=V2 -Pnexmark.runner=:runners:google-cloud-dataflow-java
-          -Pnexmark.args="  
-            --bigQueryTable=$BIGQUERYTABLE
-            --bigQueryDataset=$BIGQUERYDATASET
-            --project=$PROJECT
-            --resourceNameMode=$RESOURCENAMEMODE
-            --exportSummaryToBigQuery=$EXPORTSUMMARYTOBIGQUERY
-            --tempLocation=$TEMPLOCATION
-            --influxDatabase=$INFLUXDATABASE
-            --influxHost=$INFLUXHOST
-            --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT
-            --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB
-            --influxRetentionPolicy=$INFLUXRETENTIONPOLICY
-            --influxTags=$INFLUXTAGSJAVA11
-            --region=us-central1 
-            --suite=STRESS 
-            --numWorkers=4 
-            --maxNumWorkers=4 
-            --autoscalingAlgorithm=NONE 
-            --nexmarkParallel=16 
-            --enforceEncodability=true 
-            --enforceImmutability=true 
-            --runner=DataflowRunner 
-            --streaming=false 
-            --monitorJobs=true 
-            --manageResources=false "
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: >
+            :sdks:java:testing:nexmark:run -Pnexmark.runner.version=V2 -Pnexmark.runner=:runners:google-cloud-dataflow-java
+            -Pnexmark.args="  
+              --bigQueryTable=$BIGQUERYTABLE
+              --bigQueryDataset=$BIGQUERYDATASET
+              --project=$PROJECT
+              --resourceNameMode=$RESOURCENAMEMODE
+              --exportSummaryToBigQuery=$EXPORTSUMMARYTOBIGQUERY
+              --tempLocation=$TEMPLOCATION
+              --influxDatabase=$INFLUXDATABASE
+              --influxHost=$INFLUXHOST
+              --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT
+              --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB
+              --influxRetentionPolicy=$INFLUXRETENTIONPOLICY
+              --influxTags=$INFLUXTAGSJAVA11
+              --region=us-central1 
+              --suite=STRESS 
+              --numWorkers=4 
+              --maxNumWorkers=4 
+              --autoscalingAlgorithm=NONE 
+              --nexmarkParallel=16 
+              --enforceEncodability=true 
+              --enforceImmutability=true 
+              --runner=DataflowRunner 
+              --streaming=false 
+              --monitorJobs=true 
+              --manageResources=false "
       - name: Run *** RUN NEXMARK IN BATCH MODE USING DATAFLOW RUNNER JAVA 17 ***
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
@@ -151,3 +150,4 @@ jobs:
               --streaming=false 
               --monitorJobs=true 
               --manageResources=false "
+      
