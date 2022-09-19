@@ -43,7 +43,7 @@ env:
   INFLUXTAGS: '{"runnerVersion":"V2","javaVersion":"11"}'
 
 jobs:
-  java-postcommit-nexmark-direct:
+  java-postcommit-nexmark-dataflowv2:
     name: Run PostCommit Java Nexmark - Dataflow V2  - JAVA 11
     runs-on: self-hosted
     strategy:
