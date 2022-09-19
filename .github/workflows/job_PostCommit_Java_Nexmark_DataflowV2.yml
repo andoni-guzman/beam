@@ -14,7 +14,7 @@
 # limitations under the License.
 
 
-name: PostCommit Java Nexmark Dataflow V2
+name: PostCommit Java Nexmark Dataflow V2 - JAVA 11
 
 on:
   workflow_dispatch:
@@ -22,8 +22,11 @@ on:
     - cron: '0 */6 * * *'
   push:
     branches: ['master', 'release-*']
-    tags: ['v*']
-permissions: read-all
+    tags: 'v*'
+  pull_request:
+    branches: ['master', 'release-*']
+    tags: 'v*'
+    paths: []
 
 env:
   BIGQUERYTABLE: nexmark
@@ -37,18 +40,14 @@ env:
   BASEINFLUXMEASUREMENT: nexmark
   EXPORTSUMMARYTOINFLUXDB: true
   INFLUXRETENTIONPOLICY: forever
-
+  INFLUXTAGS: '{"runnerVersion":"V2","javaVersion":"11"}'
 
 jobs:
-  java-postcommit-nexmark-direct:
-    name: Run PostCommit Java Nexmark - Dataflow V2 
+  java-postcommit-nexmark-dataflowv2:
+    name: Run PostCommit Java Nexmark - Dataflow V2  - JAVA 11
     runs-on: self-hosted
     strategy:
       fail-fast: true
-      matrix: 
-        INFLUXTAGS: ['{"runnerVersion":"V2","javaVersion":"8"}',
-                    '{"runnerVersion":"V2","javaVersion":"11"}',
-                    '{"runnerVersion":"V2","javaVersion":"17"}']
     timeout-minutes: 240
     steps:
       - name: Checkout code
@@ -56,9 +55,8 @@ jobs:
         with:
           persist-credentials: false
           submodules: recursive
-      - id: test-properties
-        uses: ./.github/actions/setup-default-test-properties
-
+      - name: Setup environment
+        uses: ./.github/actions/setup-self-hosted-action
       - name: Run *** RUN NEXMARK IN BATCH MODE USING DATAFLOW RUNNER ***
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
@@ -76,7 +74,7 @@ jobs:
               --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT
               --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB
               --influxRetentionPolicy=$INFLUXRETENTIONPOLICY
-              --influxTags=${{matrix.INFLUXTAGS}}
+              --influxTags=$INFLUXTAGS  
               --region=us-central1 
               --suite=STRESS 
               --numWorkers=4 
@@ -86,6 +84,6 @@ jobs:
               --enforceEncodability=true 
               --enforceImmutability=true 
               --runner=DataflowRunner 
+              --streaming=false 
               --monitorJobs=true 
-              --manageResources=false
-              --streaming=false "
+              --manageResources=false "
