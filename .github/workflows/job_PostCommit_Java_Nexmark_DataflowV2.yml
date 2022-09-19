@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+# Tests for PostCommit Java Nexmark Dataflow V2 with Java 8, 11, and 17
+# using dataflow v2 runner
 name: PostCommit Java Nexmark Dataflow V2 - JAVA 11
 
 on:
@@ -40,13 +41,17 @@ env:
   BASEINFLUXMEASUREMENT: nexmark
   EXPORTSUMMARYTOINFLUXDB: true
   INFLUXRETENTIONPOLICY: forever
-  INFLUXTAGS: '{"runnerVersion":"V2","javaVersion":"11"}'
 
 jobs:
   java-postcommit-nexmark-dataflowv2:
     name: Run PostCommit Java Nexmark - Dataflow V2  - JAVA 11
     runs-on: self-hosted
     strategy:
+      matrix:
+        INFLUXTAGS: ['{"runnerVersion":"V2","javaVersion":"11"}',
+                    '{"runnerVersion":"V2","javaVersion":"11"}',
+                    '{"runnerVersion":"V2","javaVersion":"11"}']
+
       fail-fast: true
     timeout-minutes: 240
     steps:
@@ -74,7 +79,7 @@ jobs:
               --baseInfluxMeasurement=$BASEINFLUXMEASUREMENT
               --exportSummaryToInfluxDB=$EXPORTSUMMARYTOINFLUXDB
               --influxRetentionPolicy=$INFLUXRETENTIONPOLICY
-              --influxTags=$INFLUXTAGS  
+              --influxTags=${{matrix.INFLUXTAGS}}
               --region=us-central1 
               --suite=STRESS 
               --numWorkers=4 
