@@ -31,7 +31,7 @@ on:
     branches: ['master', 'release-*']
     tags: 'v*'
     paths: ['sdks/python/apache_beam/examples/**',
-            'sdks/python/apache_beam/examples/**'
+            'sdks/python/apache_beam/examples/**',
             '']
 permissions: read-all
 
@@ -87,7 +87,7 @@ jobs:
           echo "PYTHON_VERSION=$(echo ${{ matrix.version }} | sed -e 's/\.//g')" >> $GITHUB_ENV
       - name: Setup environment
         uses: ./.github/actions/setup-self-hosted-action
-      - name: Run :sdks:python:test-suites:tox:${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cloud
+      - name: Run :sdks:python:test-suites:tox:${{ env.P YTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cloud
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: :sdks:python:test-suites:tox:py${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cloud
