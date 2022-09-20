@@ -60,7 +60,7 @@ jobs:
       properties: ${{ steps.test-properties.outputs.properties }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
           submodules: recursive
@@ -77,7 +77,7 @@ jobs:
         version: ${{fromJson(needs.set-properties.outputs.properties).PythonTestProperties.ALL_SUPPORTED_VERSIONS}}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
           submodules: recursive
@@ -95,4 +95,4 @@ jobs:
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
           gradle-command: :sdks:python:test-suites:tox:py${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cython
-          arguments: "-Pposargs=$tests"
+          arguments: "-Pposargs=${{env.tests}}"
