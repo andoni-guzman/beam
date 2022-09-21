@@ -105,7 +105,7 @@ jobs:
       #  uses: ./.github/actions/gradle-command-self-hosted-action
       #  with:
       #    gradle-command: :sdks:python:test-suites:dataflow:py${{env.PYTHON_VERSION}}:postCommitITByTestDirectory
-      #    arguments: "-PtestDir=apache_beam/io//Users/parquetio_it_test.py"
+      #    arguments: "-PtestDir=apache_beam/io/parquetio_it_test.py"
       - name: Run Precommit Python Cron IO GCP tests
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
