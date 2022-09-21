@@ -96,11 +96,11 @@ jobs:
       #  with:
       #    gradle-command: :sdks:python:test-suites:tox:py${{ env.PYTHON_VERSION }}:testPy${{ env.PYTHON_VERSION }}Cython
       #    arguments: "-Pposargs=${{env.tests}}"
-      - name: Run Precommit Python Cron IO Filesystem Test
-        uses: ./.github/actions/gradle-command-self-hosted-action
-        with:
-          gradle-command: :sdks:python:test-suites:dataflow:py${{env.PYTHON_VERSION}}:postCommitITByTestDirectory
-          arguments: "-PtestDir=apache_beam/io/fileio_test.py"
+      #- name: Run Precommit Python Cron IO Filesystem Test
+      #  uses: ./.github/actions/gradle-command-self-hosted-action
+      #  with:
+      #    gradle-command: :sdks:python:test-suites:dataflow:py${{env.PYTHON_VERSION}}:postCommitITByTestDirectory
+      #    arguments: "-PtestDir=apache_beam/io/fileio_test.py"
       - name: Run Precommit Python Cron IO Parquet Test
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
