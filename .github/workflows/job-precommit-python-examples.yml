@@ -101,11 +101,11 @@ jobs:
       #  with:
       #    gradle-command: :sdks:python:test-suites:dataflow:py${{env.PYTHON_VERSION}}:postCommitITByTestDirectory
       #    arguments: "-PtestDir=apache_beam/io/fileio_test.py"
-      #- name: Run Precommit Python Cron IO Parquet Test
-      #  uses: ./.github/actions/gradle-command-self-hosted-action
-      #  with:
-      #    gradle-command: :sdks:python:test-suites:dataflow:py${{env.PYTHON_VERSION}}:postCommitITByTestDirectory
-      #    arguments: "-PtestDir=apache_beam/io/parquetio_it_test.py"
+      - name: Run Precommit Python Cron IO Parquet Test
+        uses: ./.github/actions/gradle-command-self-hosted-action
+        with:
+          gradle-command: :sdks:python:test-suites:dataflow:py${{env.PYTHON_VERSION}}:postCommitITByTestDirectory
+          arguments: "-PtestDir=apache_beam/io/parquetio_it_test.py"
       - name: Run Precommit Python Cron IO GCP tests
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
