@@ -70,6 +70,13 @@ jobs:
     needs: update_python_dependencies
     name: Commit Git Changes
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Setup environment
+        uses: ./.github/actions/setup-self-hosted-action
       - name: Install gh cli
         uses: ./.github/actions/setup-gh-cli-linux
       - name: Set git config
