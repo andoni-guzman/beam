@@ -44,8 +44,8 @@ jobs:
         uses: ./.github/actions/setup-default-test-properties
       
   commit_changes:
-    #runs-on: [self-hosted, ubuntu-20.04]
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, ubuntu-20.04]
+    #runs-on: ubuntu-latest
     env:
       BRANCH_NAME: ${{ github.event.inputs.BRANCH_NAME }}
     name: Commit Git Changes
