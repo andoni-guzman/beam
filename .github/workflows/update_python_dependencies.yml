@@ -67,9 +67,9 @@ jobs:
         run: |
           git checkout -b ${{env.BRANCH_NAME}}
           git add -A 
-          git commit -m "Update Python Dependencies"
-          git status 
-          git push origin ${{env.BRANCH_NAME}}:${{env.BRANCH_NAME}}
+          if [git commit -m "Update Python Dependencies"] then
+          echo "Commit succedded" else echo "Nothing to commit" 
+          fi
 
 
 
