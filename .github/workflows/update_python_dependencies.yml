@@ -67,7 +67,7 @@ jobs:
         run: |
           git checkout -b ${{env.BRANCH_NAME}}
           git add -A 
-          if [ git commit -m "Update Python Dependencies" ]
+          if [ $(git commit -m "Update Python Dependencies") -eq 0 ];
           then
             git push --set-upstream origin ${{env.BRANCH_NAME}} --quiet
             GITHUB_PR_URL=$(gh pr create --title "Update Python Dependencies from BRANCH ${{ env.BRANCH_NAME }}" --body "This PR was create using the update python dependencies from branch ${{ env.BRANCH_NAME }}")
