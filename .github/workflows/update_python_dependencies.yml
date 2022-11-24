@@ -16,7 +16,9 @@
 # under the License.
 
 # This workflow will update python dependencies as part of the release process
-# And commit the changes into the branch release
+# And commit the changes into the branch release, this workflow runs 
+# :sdks:python:container:generatePythonRequirementsAll if some dependencies are modifies, 
+# the workflow will commit this changes, and create a PR 
 
 name: Update Python Depedencies
 
@@ -37,21 +39,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false        
+          ref: ${{ github.event.pull_request.head.sha }}       
       - id: test-properties
         uses: ./.github/actions/setup-default-test-properties
 
   update_python_dependencies:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, ubuntu-20.04]
     needs: set-properties
+    env:
+      BRANCH_NAME: ${{ github.event.inputs.BRANCH_NAME }}
     name: Update Python Dependencies
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
       - name: Setup environment
         uses: ./.github/actions/setup-self-hosted-action
       - name: Update Python Dependencies
@@ -59,21 +59,6 @@ jobs:
         with:
           gradle-command: :sdks:python:container:generatePythonRequirementsAll
           arguments: "-Pposargs=${{env.tests}}"
-      
-  commit_changes:
-    runs-on: [self-hosted, ubuntu-20.04]
-    env:
-      BRANCH_NAME: ${{ github.event.inputs.BRANCH_NAME }}
-    needs: update_python_dependencies
-    name: Commit Git Changes
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          persist-credentials: false
-      - name: Setup environment
-        uses: ./.github/actions/setup-self-hosted-action
       - name: Install gh cli
         uses: ./.github/actions/setup-gh-cli-linux
       - name: Set git config
@@ -84,15 +69,12 @@ jobs:
         run: |
           git checkout -b ${{env.BRANCH_NAME}}
           git add -A 
-          git commit -m "Update Python Dependencies" --quiet
-          git push --set-upstream origin ${{ env.BRANCH_NAME}} --quiet
-          GITHUB_PR_URL=$(gh pr create --title "Update Python Dependencies from BRANCH ${{ env.BRANCH_NAME }}" --body "This PR was create using the update python dependencies from branch ${{ env.BRANCH_NAME }}")
-          echo "Link of the new PR  $GITHUB_PR_URL "
-
-
-
-
-
-
-
-    
+          git diff-index --quiet HEAD || gitdiff=$? || echo $? 
+          if [[ $gitDiff != 0 ]]; then
+            git commit -m "Update Python Dependencies" --quiet
+            git push origin ${{env.BRANCH_NAME}} --quiet
+            GITHUB_PR_URL=$(gh pr create --title "Update Python Dependencies from BRANCH ${{ env.BRANCH_NAME }}" --body "This PR was create using the update python dependencies from branch ${{ env.BRANCH_NAME }}")
+            echo "Link of the new PR  $GITHUB_PR_URL "
+          else
+            echo "No changes on the files"
+          fi
