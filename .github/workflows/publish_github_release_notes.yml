@@ -37,21 +37,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3        
+      - id: test-properties
+        uses: ./.github/actions/setup-default-test-properties
+
   publish_github_release_notes:
     runs-on: [self-hosted, ubuntu-20.04]
     needs: set-properties
     env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_VERSION: ${{ github.event.inputs.RELEASE_VERSION}}
     name: Update Python Dependencies
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup environment
-        uses: ./.github/actions/setup-self-hosted-action
       - name: Publish github release notes
         run: |
-          pwd
-          ls
           POST_PATH=$(echo "website/www/site/content/en/blog/beam-${{env.RELEASE_VERSION}}.md")
           RELEASE_NOTES=$(
           cat ${POST_PATH} |                               # Read post's content
@@ -71,3 +71,9 @@ jobs:
           EOF
           )"
           echo -e "Below is the request JSON about to be sent to the Github API:\n\n ${REQUEST_JSON}\n\n"
+          curl https://api.github.com/repos/andoni-guzman/beam/releases \
+          -X POST \
+          -H "Authorization: token ${{GITHUB_TOKEN}}" \
+          -H "Content-Type:application/json" \
+          -d "${REQUEST_JSON}"
+          echo -e "\n\nView the release on Github: https://github.com/apache/beam/releases/tag/v${RELEASE_VER}"
