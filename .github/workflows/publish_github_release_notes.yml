@@ -16,7 +16,7 @@
 # under the License.
 
 # This workflow will take the release notes from 
-# /website/www/site/content/en/blog/beam-${RELEASE_VER}.md" 
+# /website/www/site/content/en/blog/beam-${RELEASE_VERSION}.md" 
 # and updated in beam repo. 
 
 name: Publish Github Release Notes
@@ -46,7 +46,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.TOKEN }}
       RELEASE_VERSION: ${{ github.event.inputs.RELEASE_VERSION}}
-    name: Update Python Dependencies
+    name: Publish Github Release Notes
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -63,17 +63,17 @@ jobs:
           ESCAPED_NOTES=$(printf '%s' "${RELEASE_NOTES}" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
           REQUEST_JSON="$(cat <<-EOF
           {
-            "tag_name": "v${RELEASE_VER}",
-            "name": "Beam ${RELEASE_VER} release",
+            "tag_name": "v${RELEASE_VERSION}",
+            "name": "Beam ${RELEASE_VERSION} release",
             "body": ${ESCAPED_NOTES},
             "generate_release_notes": true
           }
           EOF
           )"
           echo -e "Below is the request JSON about to be sent to the Github API:\n\n ${REQUEST_JSON}\n\n"
-          curl https://api.github.com/repos/andoni-guzman/beam/releases \
+          curl https://api.github.com/repos/apache/beam/releases \
           -X POST \
-          -H "Authorization: token ${{GITHUB_TOKEN}}" \
+          -H "Authorization: token ${{env.GITHUB_TOKEN}}" \
           -H "Content-Type:application/json" \
           -d "${REQUEST_JSON}"
-          echo -e "\n\nView the release on Github: https://github.com/apache/beam/releases/tag/v${RELEASE_VER}"
+          echo -e "\n\nView the release on Github: https://github.com/apache/beam/releases/tag/v${RELEASE_VERSION}"
