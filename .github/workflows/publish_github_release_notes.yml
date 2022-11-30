@@ -1,0 +1,76 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+# This workflow will take the release notes from 
+# /website/www/site/content/en/blog/beam-${RELEASE_VER}.md" 
+# and updated in beam repo. 
+
+name: Publish Github Release Notes
+
+on:
+  workflow_dispatch:
+    inputs:
+      RELEASE_VERSION:
+        description: Release Version to update notes into beam repo 
+        required: true
+permissions: read-all
+
+jobs:
+  set-properties:
+    runs-on: [self-hosted, ubuntu-20.04]
+    outputs:
+      properties: ${{ steps.test-properties.outputs.properties }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3        
+      - id: test-properties
+        uses: ./.github/actions/setup-default-test-properties
+
+  publish_github_release_notes:
+    runs-on: [self-hosted, ubuntu-20.04]
+    needs: set-properties
+    env:
+      RELEASE_VERSION: ${{ github.event.inputs.RELEASE_VERSION}}
+    name: Update Python Dependencies
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup environment
+        uses: ./.github/actions/setup-self-hosted-action
+      - name: Publish github release notes
+        run: |
+          SCRIPT_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+          . "${SCRIPT_PATH}/script.config"
+          POST_PATH=$(echo "${SCRIPT_PATH}/../../../../website/www/site/content/en/blog/beam-${{env.RELEASE_VER}}.md")
+          RELEASE_NOTES=$(
+          cat ${POST_PATH} |                               # Read post's content
+          sed -n '/<!--/,$p' |                             # Remove post's metadata
+          sed -e :a -Ee 's/<!--.*-->.*//g;/<!--/N;//ba' |  # Remove license
+          sed '/./,$!d' |                                  # Remove leading whitespace
+          sed 's=](/=](https://beam.apache.org/=g'         # Replace relative website path with absolute
+          )
+          ESCAPED_NOTES=$(printf '%s' "${RELEASE_NOTES}" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
+          REQUEST_JSON="$(cat <<-EOF
+          {
+            "tag_name": "v${RELEASE_VER}",
+            "name": "Beam ${RELEASE_VER} release",
+            "body": ${ESCAPED_NOTES},
+            "generate_release_notes": true
+          }
+          EOF
+          )"
+          echo -e "Below is the request JSON about to be sent to the Github API:\n\n ${REQUEST_JSON}\n\n"
