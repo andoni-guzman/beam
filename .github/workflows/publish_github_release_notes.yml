@@ -53,9 +53,9 @@ jobs:
         uses: ./.github/actions/setup-self-hosted-action
       - name: Publish github release notes
         run: |
-          SCRIPT_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-          . "${SCRIPT_PATH}/script.config"
-          POST_PATH=$(echo "${SCRIPT_PATH}/../../../../website/www/site/content/en/blog/beam-${{env.RELEASE_VER}}.md")
+          pwd
+          ls
+          POST_PATH=$(echo "website/www/site/content/en/blog/beam-${{env.RELEASE_VER}}.md")
           RELEASE_NOTES=$(
           cat ${POST_PATH} |                               # Read post's content
           sed -n '/<!--/,$p' |                             # Remove post's metadata
