@@ -38,7 +38,7 @@ jobs:
         uses: ./.github/actions/setup-default-test-properties
 
   update_python_dependencies:
-    runs-on: [self-hosted, ubuntu-20.04]
+    runs-on: ubuntu-latest
     needs: set-properties
     env:
       BRANCH_NAME: ${{ github.event.inputs.BRANCH_NAME }}
