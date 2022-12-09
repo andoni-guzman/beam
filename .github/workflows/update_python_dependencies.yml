@@ -48,6 +48,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup environment
         uses: ./.github/actions/setup-self-hosted-action
+      - name: Test mike
+        run: |
+          echo "Se va a ir a mimir"
+          sleep(12000)
       - name: Update Python Dependencies
         uses: ./.github/actions/gradle-command-self-hosted-action
         with:
